@@ -1,0 +1,4 @@
+[2025-09-02 16:36:49,349] INFO django.utils.autoreload: Watching for file changes with StatReloader
+[2025-09-02 16:37:06,109] INFO query.views: User input: 
+[2025-09-02 16:37:06,110] INFO query.utils_db: Executing SQL: SELECT * FROM testuser LIMIT 5
+[2025-09-02 16:37:06,112] INFO query.utils_db: Returned 3 rows
