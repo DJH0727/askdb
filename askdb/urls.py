@@ -18,11 +18,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from chat.views import chat_page
-from query.views import execute_query
-
+from chat.views import chat_page, getReply
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('chat/', chat_page, name='chat_page'),  # 新增
-    path('query/', execute_query, name='execute_query'),
+    path("", chat_page),
+    path('chat/', chat_page, name='chat_page'),
+    path("getReply/",getReply, name="getReply"),
 ]
