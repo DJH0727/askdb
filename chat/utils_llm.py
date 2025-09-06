@@ -1,10 +1,12 @@
 
 import json
+import logging
 
 from openai import OpenAI
 
 from chat.prompt import generate_sql_from_nl_prompt, generate_chart_and_summary_prompt
 
+logger = logging.getLogger(__name__)
 client = OpenAI(api_key="sk-1dd6e304227b483a9911286af31c6827", base_url="https://api.deepseek.com")
 #client = OpenAI(api_key="sk-qUUM06aGftDv1gKf2TBY4AjfwfIlCxkm3yYPqh5HHYSUGls9", base_url="https://api.deepseek.com")
 
@@ -52,6 +54,7 @@ def generate_sql_from_nl(nl_question: str, table_schema: str):
     prompt = generate_sql_from_nl_prompt(nl_question, table_schema)
     role = "你是一个SQL生成器和数据库助手"
     result = call_llm_json(prompt, role)
+    logger.info("generate_sql_from_nl result: \n%s", result)
     if result.get("code") == 0:
         return result.get("msg")
     else:
@@ -74,6 +77,7 @@ def generate_chart_and_summary(query_result: list,user_question: str) -> dict:
     prompt = generate_chart_and_summary_prompt(query_result, user_question)
     role = "你是一个数据分析助手"
     result = call_llm_json(prompt, role)
+    logger.info("generate_chart_and_summary result: \n%s", result)
     if result.get("code") == 0:
         return result.get("msg")
     else:
@@ -123,7 +127,7 @@ def check_sql_exception(sql: str, exception_msg: str, schema: str):
             temperature=0
         )
         llm_output = response.choices[0].message.content.strip()
-        print(llm_output)
+        logger.info("check_sql_exception result: \n%s", llm_output)
         result = json.loads(llm_output)
         return {"code": 0 if result.get("valid") else 1, "msg": result.get("reason")}
 

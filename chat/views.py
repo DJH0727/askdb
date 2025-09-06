@@ -1,3 +1,5 @@
+import logging
+
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -5,7 +7,7 @@ from chat.constants import TABLE_SCHEMA, LLM_RESPONSE_TYPE
 from chat.utils_db import run_sql
 from chat.utils_llm import generate_sql_from_nl, generate_chart_and_summary, check_sql_exception
 
-
+logger = logging.getLogger(__name__)
 # Create your views here.
 def chat_page(request):
     return render(request, "chat.html")
@@ -19,6 +21,7 @@ def getReply(request):
         "summary":""
     }
     user_input = request.GET.get("text","")
+    logger.info(f"user input: {user_input}")
     llm_response = generate_sql_from_nl(user_input, TABLE_SCHEMA)
     if llm_response.get("intent") == LLM_RESPONSE_TYPE["QUERY"]:
         sql = llm_response.get("sql")
