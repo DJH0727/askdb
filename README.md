@@ -10,6 +10,7 @@ askdb/
 │   ├── asgi.py
 │   └── wsgi.py
 │
+
 ├── chat/                      # app1：自然语言问答
 │   ├── __init__.py
 │   ├── apps.py
