@@ -18,3 +18,17 @@
 [2025-09-04 20:21:20,823] INFO chat.utils_db: Returned 9 rows
 [2025-09-04 20:21:26,696] INFO chat.utils_llm: generate_chart_and_summary result: 
 {'code': 0, 'msg': {'chart_type': 'table', 'summary': '查询到9名工资超过5000的员工，涵盖技术、销售、市场、人事、客服部门，最高工资9000元（技术部David），最低工资5200元（客服部Ivy）。其中4人无邮箱信息。'}}
+[2025-09-08 07:13:30,659] INFO chat.views: user input: 查询有多少员工
+[2025-09-08 07:13:37,723] INFO chat.utils_llm: generate_sql_from_nl result: 
+{'code': 0, 'msg': {'intent': 'query', 'sql': 'SELECT COUNT(*) AS employee_count FROM users', 'answer': '用户询问员工数量，这是一个合法的数据库查询。我生成了一个简单的COUNT查询来统计users表中的记录总数，这直接回答了用户的问题。'}}
+[2025-09-08 07:13:37,723] INFO chat.utils_db: Executing SQL: SELECT COUNT(*) AS employee_count FROM users
+[2025-09-08 07:13:37,766] INFO chat.utils_db: Returned 1 rows
+[2025-09-08 07:13:42,795] INFO chat.utils_llm: generate_chart_and_summary result: 
+{'code': 0, 'msg': {'chart_type': 'table', 'summary': '公司共有10名员工'}}
+[2025-09-08 07:14:12,643] INFO chat.views: user input: 查询有那些员工
+[2025-09-08 07:14:21,189] INFO chat.utils_llm: generate_sql_from_nl result: 
+{'code': 0, 'msg': {'intent': 'query', 'sql': 'SELECT name, email, hire_date, salary FROM users', 'answer': '用户要求查询所有员工信息。根据数据库表结构，员工信息存储在users表中。我选择了name（员工姓名）、email（邮箱）、hire_date（入职日期）和salary（工资）字段，这些是员工相关的核心业务信息，避免了直接返回id字段，并符合只查询相关字段的要求。'}}
+[2025-09-08 07:14:21,189] INFO chat.utils_db: Executing SQL: SELECT name, email, hire_date, salary FROM users
+[2025-09-08 07:14:21,231] INFO chat.utils_db: Returned 10 rows
+[2025-09-08 07:14:27,843] INFO chat.utils_llm: generate_chart_and_summary result: 
+{'code': 0, 'msg': {'chart_type': 'table', 'summary': '查询结果显示共有10名员工，其中4人无邮箱信息，薪资范围在5000-9000元之间，入职时间从2021年9月到2023年4月不等。'}}

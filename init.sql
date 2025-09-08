@@ -1,3 +1,5 @@
+create DATABASE  if not exists  askdb_db;
+
 USE askdb_db;
 drop table if exists departments;
 drop table if exists users;
